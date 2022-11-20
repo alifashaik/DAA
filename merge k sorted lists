@@ -1,0 +1,49 @@
+struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2){
+    struct ListNode *newn=NULL,*t=NULL,*t1=list1,*t2=list2,*temp=NULL;
+    if(list1==NULL)
+        return list2;
+    if(list2==NULL)
+        return list1;
+    if(list1==NULL && list2==NULL)
+        return NULL;
+    if(t1->val<=t2->val)
+    {
+        newn=t1;
+        t1=t1->next;
+    }
+    else
+    {
+        newn=t2;
+        t2=t2->next;
+    }
+    t=newn;
+    while(t1!=NULL && t2!=NULL)
+    {
+        if(t1->val<=t2->val)
+    {
+            temp=t1;
+            t1=t1->next;
+    }
+        else
+        {
+            temp=t2;
+            t2=t2->next;
+        }
+        t->next=temp;
+        t=temp;
+}
+    if(t1==NULL)
+        t->next=t2;
+    if(t2==NULL)
+        t->next=t1;
+    return newn;
+}
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize){
+    if (listsSize == 0) return NULL;
+	if (listsSize == 1) return lists[0];
+	struct ListNode* result = NULL;
+	for (int i = 0; i < listsSize; i++)
+		result = mergeTwoLists(result, lists[i]);
+	return result;
+
+}
