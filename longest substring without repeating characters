@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include<string.h>
+int pres(char s,char st[])
+{
+    for(int i=0;i<strlen(st);i++)
+       if(st[i]==s)
+        return 0;
+    return 1;
+}
+int lengthOfLongestSubstring(char s[]){
+char st[strlen(s)];
+int c=1,f=0,max=1;
+for(int j=0;j<strlen(s);j++)
+{  
+    st[f++]=s[j];
+for(int i=1;i<strlen(s);i++)
+{
+   if(pres(s[i],st))
+     {
+         c++;
+         st[f++]=s[i];
+     }
+    else
+      break;
+}
+ f=0;
+ if(max<c)
+ {
+     max=c;
+     c=0;
+ }  
+}
+//printf("%d",max);
+return max;
+}
+void main()
+{
+    char s[]="pwwkew";
+    printf("%d ",lengthOfLongestSubstring(s)); 
+}
